@@ -23,11 +23,19 @@ const Home = () => {
         <li> 
           {/* Endpoint to route to About component */} 
           <Link to="/spotify" >Spotify Login</Link> 
+        </li>
+        <li> 
+          {/* Endpoint to route to Prompt component */} 
+          <Link to="/prompt" >Prompt-Based Generation</Link> 
         </li> 
-        {/* <li>  */}
+        <li>
+          {/* Endpoint to route to Account component */} 
+          <Link to="/account" >Account</Link>
+        </li>
+        <li>
           {/* Endpoint to route to Contact Us component */} 
-          {/* <Link to="/contactus">Contact Us</Link>  */}
-        {/* </li>  */}
+          <Link to="/contactus">Contact Us</Link> 
+        </li>
       </ul> 
     </div> 
   ); 
