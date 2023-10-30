@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // different end points. 
 import { Link } from "react-router-dom"; 
 import { useEffect } from "react";
+import '../App.css';
   
 
 
@@ -11,15 +12,15 @@ const Prompt = () => {
 
 
   return ( 
-    <div> 
-      <h1>Prompt</h1> 
-      <br /> 
-      <body>
+    <div className = "App"> 
+    <header className = "App-header">
+      <h1>Prompt-Based Generation</h1>
+      <br />
         <form action="/" method="GET"> 
             <p>Please type in your song prompt below:</p>
             <input type="text"/>
         </form>
-      </body>
+      </header>
     </div> 
   ); 
 }; 

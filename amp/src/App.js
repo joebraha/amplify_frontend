@@ -6,6 +6,7 @@ import Prompt from './components/Prompt';
 import Account from './components/Account';
 import Playlists from './components/Playlists';
 import ContactUs from './components/ContactUs';
+import Login from './components/Login';
 
 
 const Navbar = () => {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/account" element={<Account/>}/>
         <Route path="/playlists" element={<Playlists/>}/>
         <Route path="/contactus" element={<ContactUs/>}/>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   );

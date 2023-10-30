@@ -8,15 +8,23 @@ import "../App.css";
 
 
 //Todo: fill in with contact information
-const ContactUs = () => { 
+const Login = () => { 
 
 
   return ( 
     <div className = "App">
       <header className = "App-header">
-      <h1>Contact Us</h1> 
+      <h1>Login</h1> 
       <br /> 
-      <p>Contact us below at:</p>
+      <form action="/" method="GET"> {/* send to backend */}
+            <p>Username:</p>
+            <input type="text"/>
+        </form>
+        <br />
+        <form action="/" method="GET"> {/* send to backend */}
+            <p>Password:</p>
+            <input type="text"/>
+        </form>
       <u>
         <p>amplifyb36@gmail.com</p>
       </u>
@@ -25,4 +33,4 @@ const ContactUs = () => {
   ); 
 }; 
 
-export default ContactUs;
+export default Login;
