@@ -9,8 +9,6 @@ import "../App.css";
 
 //Todo: fill in with contact information
 const Login = () => { 
-
-
   return ( 
     <div className = "App">
       <header className = "App-header">
@@ -28,6 +26,10 @@ const Login = () => {
       <u>
         <p>amplifyb36@gmail.com</p>
       </u>
+      <li> 
+          {/* Endpoint to route to Home Page */} 
+          <Link to="/">Return to Home</Link> {}
+      </li>
       </header>
     </div> 
   ); 

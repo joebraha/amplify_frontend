@@ -7,6 +7,7 @@ import Account from './components/Account';
 import Playlists from './components/Playlists';
 import ContactUs from './components/ContactUs';
 import Login from './components/Login';
+import Artists from './components/Artists';
 
 
 const Navbar = () => {
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home/>}/>
         <Route path="/spotify" element={<LoginSpotify/>}/>
+        <Route path="/artists" element={<Artists/>}/>
         <Route path="/prompt" element={<Prompt/>}/>
         <Route path="/account" element={<Account/>}/>
         <Route path="/playlists" element={<Playlists/>}/>

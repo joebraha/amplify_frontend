@@ -16,6 +16,10 @@ const Playlists = () => {
       <br /> 
       <ul>
       </ul>
+      <li> 
+          {/* Endpoint to route to Home Page */} 
+          <Link to="/">Return to Home</Link> {}
+      </li>
     </div> 
   ); 
 }; 

@@ -4,19 +4,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom"; 
 import { useEffect } from "react";
 import "../App.css";
-  
-
-
 
 const Account = () => { 
-
-
   return ( 
     <div className="App">
       <header className="App-header"> 
       <h1>Account</h1> 
       <br /> 
       <ul> 
+        <li> 
+          {/* Endpoint to route to Home Page */} 
+          <Link to="/">Return to Home</Link> {}
+        </li>
         <li> 
           {/* Endpoint to route to Home component */} 
           <Link to="/">Home</Link> 
@@ -30,6 +29,7 @@ const Account = () => {
           <Link to="/playlists">See Saved Playlists</Link> 
         </li>
         {/* expand to include: friends, ...  */}
+
           
       </ul>
       </header> 

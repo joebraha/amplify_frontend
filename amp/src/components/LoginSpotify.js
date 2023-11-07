@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import { useEffect, useState } from 'react';
 import '../App.css';
+import { Link } from "react-router-dom"; 
 
 const CLIENT_ID = "c0e9c73676684f3e8d10acc56b94be60"
 const REDIR_URI = "http://localhost:3000/spotify" // TODO: add url/spotify to redirect_url allow list
@@ -34,6 +35,10 @@ function LoginSpotify() {
         <h1>Spotify Login</h1>
         <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIR_URI}&response_type=${RESPONSE_TYPE}`}>Login
                   to Spotify</a>
+        <li> 
+          {/* Endpoint to route to Home Page */} 
+          <Link to="/">Return to Home</Link> {}
+        </li>
       </header>
     </div>
   );
