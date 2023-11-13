@@ -27,19 +27,19 @@ const Home = () => {
           <FontAwesomeIcon icon={faSpotify} beat size="lg" style={{ color: "#1aa23c" }} />
         </Link> */}
         <Link to="/spotify" className="toolbar-link" data-text="Spotify Login">
-          <FontAwesomeIcon icon={faSpotify} beat size="lg" style={{ color: "#1aa23c" }} />
+          <FontAwesomeIcon icon={faSpotify} beat size="2xl" style={{ color: "#1aa23c" }} />
         </Link>
         <Link to="/artists" className="toolbar-link" data-text="Artist Lookup">
-          <FontAwesomeIcon icon={faSearch} size="lg" style={{ color: "#e2761d" }} />
+          <FontAwesomeIcon icon={faSearch} size="2xl" style={{ color: "#e2761d" }} />
         </Link>
         <Link to="/prompt" className="toolbar-link" data-text="Prompt-Based Generation">
-          <FontAwesomeIcon icon={faPenToSquare} size="lg" style={{color: "#3135aa",}} />
+          <FontAwesomeIcon icon={faPenToSquare} size="2xl" style={{color: "#3135aa",}} />
         </Link>
         <Link to="/account" className="toolbar-link" data-text="Account">
-          <FontAwesomeIcon icon={faUser} size="lg" style={{ color: "#3498db" }} />
+          <FontAwesomeIcon icon={faUser} size="2xl" style={{ color: "#3498db" }} />
         </Link>
         <Link to="/contactus" className="toolbar-link" data-text="Contact Us">
-          <FontAwesomeIcon icon={faAddressCard} size="lg" style={{ color: "#e74c3c" }} />
+          <FontAwesomeIcon icon={faAddressCard} size="2xl" style={{ color: "#e74c3c" }} />
         </Link>
       </div>
       <div className="center">
