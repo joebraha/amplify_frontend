@@ -52,10 +52,10 @@ const LoginSpotify = () => {
         <h1>Spotify Login</h1>
         <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIR_URI}&response_type=${RESPONSE_TYPE}`}>Login
                   to Spotify</a>
-        <li> 
-          {/* Endpoint to route to Home Page */} 
-          <Link to="/">Return to Home</Link> {}
-        </li>
+    
+        {/* Endpoint to route to Home Page */} 
+        <Link to="/">Return to Home</Link> {}
+        
         <GetPlaylists />
       </header>
     </div>
