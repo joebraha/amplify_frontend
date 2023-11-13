@@ -3,7 +3,7 @@ import GetPlaylists from "/Users/emmawilkins/Desktop/amplify_frontend-1/amp/src/
 import '../App.css';
 import { Link } from "react-router-dom"; 
 
-const CLIENT_ID = "c0e9c73676684f3e8d10acc56b94be60"
+const CLIENT_ID = "c0e9c73676684f3e8d10acc56b94be60" // specific to my spotify application ? 
 const REDIR_URI = "http://localhost:3000/spotify" 
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const RESPONSE_TYPE = "token"

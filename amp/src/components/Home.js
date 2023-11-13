@@ -4,45 +4,49 @@ import React, { useState } from "react";
 // different end points. 
 import { Link } from "react-router-dom"; 
 import { useEffect } from "react";
-  
+
+// have to import to use icons 
+// npm install react-icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 
 
+const Home = () => {
+  return (
+    <div>
+      <h1>Amplify</h1>
+      <nav>
+        <ul>
+          {/* <li>
+            <Link to="/">Home</Link>
+          </li> */}
+          <li>
+            <FontAwesomeIcon icon={faSpotify} beat size="xl" style={{ color: "#1aa23c" }} />
+            <Link to="/spotify">Spotify Login</Link>
+          </li>
+          <li>
+            <Link to="/artists">Artist Lookup</Link>
+          </li>
+          <li>
+            <Link to="/prompt">Prompt-Based Generation</Link>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faUser} size="lg" style={{ color: "#3498db" }} />
+            <Link to="/account">Account</Link>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faAddressCard} size="lg" style={{ color: "#e74c3c" }} />
+            <Link to="/contactus">Contact Us</Link>
+          </li>
+        </ul>
+      </nav>
+      <p>Explore our website to create your own AI generated music and view others creations!</p>
+      <footer>
+        <p>&copy; 2023 Amplify. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+};
 
-const Home = () => { 
-
-
-  return ( 
-    <div> 
-      <h1>Home Page</h1> 
-      <br /> 
-      <ul> 
-        <li> 
-          {/* Endpoint to route to Home component */} 
-          <Link to="/">Home</Link> 
-        </li> 
-        <li> 
-          {/* Endpoint to route to About component */} 
-          <Link to="/spotify" >Spotify Login</Link> 
-        </li>
-        <li>
-          {/* Endpoint to route to Contact Us component */} 
-          <Link to="/artists">Artist Lookup</Link> 
-        </li>
-        <li> 
-          {/* Endpoint to route to Prompt component */} 
-          <Link to="/prompt" >Prompt-Based Generation</Link> 
-        </li> 
-        <li>
-          {/* Endpoint to route to Account component */} 
-          <Link to="/account" >Account</Link>
-        </li>
-        <li>
-          {/* Endpoint to route to Contact Us component */} 
-          <Link to="/contactus">Contact Us</Link> 
-        </li>
-      </ul> 
-    </div> 
-  ); 
-}; 
-  
-export default Home; 
+export default Home;
