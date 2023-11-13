@@ -11,3 +11,5 @@ npm install @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
 
 npm install @fortawesome/free-solid-svg-icons
 
+-- font 
+npm install react-wordart (for this one i had to run npm install node-sass first to get it to work)

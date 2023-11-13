@@ -36,3 +36,39 @@
     transform: rotate(360deg);
   }
 }
+
+.toolbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f8f9fa;
+  padding: 10px;
+}
+
+.toolbar-link {
+  text-decoration: none;
+  color: #000;
+  position: relative;
+}
+
+.toolbar-link:before {
+  content: attr(data-text); /* Initially set content to data-text attribute */
+  position: absolute;
+  opacity: 0; /* Initially set opacity to 0 */
+  transition: opacity 0.3s ease-in-out; /* Add transition effect */
+}
+
+.toolbar-link:hover:before {
+  opacity: 1; /* Show the text on hover */
+}
+
+.toolbar-link:hover {
+  color: #007bff;
+}
+.container {
+  text-align: center; /* Center align the content */
+}
+
+.center {
+  text-align: center; /* Center align the content within this div */
+  margin-top: 20px; /* Add some space above the centered content */
+}
