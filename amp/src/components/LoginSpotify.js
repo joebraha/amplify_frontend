@@ -1,35 +1,52 @@
-// import logo from './logo.svg';
-import { useEffect, useState } from 'react';
+import React, { useEffect } from "react";
+import GetPlaylists from "/Users/emmawilkins/Desktop/amplify_frontend-1/amp/src/components/GetPlaylists.js";
 import '../App.css';
 import { Link } from "react-router-dom"; 
 
 const CLIENT_ID = "c0e9c73676684f3e8d10acc56b94be60"
-const REDIR_URI = "http://localhost:3000/spotify" // TODO: add url/spotify to redirect_url allow list
+const REDIR_URI = "http://localhost:3000/spotify" 
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const RESPONSE_TYPE = "token"
+const SPACE_DELIMITER = "%20";
+const SCOPES = [
+  "user-read-currently-playing",
+  "user-read-playback-state",
+  "playlist-read-private",
+];
+const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER);
 
+const getReturnedParamsFromSpotifyAuth = (hash) => {
+  const stringAfterHashtag = hash.substring(1);
+  const paramsInUrl = stringAfterHashtag.split("&");
+  const paramsSplitUp = paramsInUrl.reduce((accumulater, currentValue) => {
+    console.log(currentValue);
+    const [key, value] = currentValue.split("=");
+    accumulater[key] = value;
+    return accumulater;
+  }, {});
 
-function grabToken () {
-    return window.location.hash.substring(1).split('&').reduce((initial, item)=>{
-      let parts = item.split("=");
-      initial[parts[0]] = decodeURIComponent(parts[1]);
-      return initial
-    }, {});
-  }
+  return paramsSplitUp;
+};
 
-
-function LoginSpotify() {
-  // let [awaitingToken, setAwaitingToken] = useState(false);
-
+const LoginSpotify = () => {
   useEffect(() => {
-    const token = grabToken();
-    if(token) {
-      //send token to backend
-      console.log(token); // TODO: called twice for some reason
+    if (window.location.hash) {
+      const { access_token, expires_in, token_type } =
+        getReturnedParamsFromSpotifyAuth(window.location.hash);
+
+      localStorage.clear();
+
+      localStorage.setItem("accessToken", access_token);
+      localStorage.setItem("tokenType", token_type);
+      localStorage.setItem("expiresIn", expires_in);
     }
   });
 
-  return (
+  const handleLogin = () => {
+    window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIR_URI}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`;
+  };
+
+    return (
     <div className="App">
       <header className="App-header">
         <h1>Spotify Login</h1>
@@ -39,9 +56,10 @@ function LoginSpotify() {
           {/* Endpoint to route to Home Page */} 
           <Link to="/">Return to Home</Link> {}
         </li>
+        <GetPlaylists />
       </header>
     </div>
   );
-}
+};
 
 export default LoginSpotify;
