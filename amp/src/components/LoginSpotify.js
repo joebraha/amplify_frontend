@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import GetPlaylists from "/Users/emmawilkins/Desktop/amplify_frontend-1/amp/src/components/GetPlaylists.js";
+import GetPlaylists from "./GetPlaylists";
 import '../App.css';
 import { Link } from "react-router-dom"; 
 

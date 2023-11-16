@@ -16,6 +16,7 @@ const Login = () => {
 
   const formSubmit = async (event) => {
     event.preventDefault();
+    console.log("submitting...")
     result = await api.post('/login', {username, password});
     setUser("");
     setPass("");

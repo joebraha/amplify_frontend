@@ -12,7 +12,8 @@ import { faUser, faAddressCard, faSearch, faPenToSquare } from '@fortawesome/fre
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 
 // text font 
-import WordArt from 'react-wordart';
+// import WordArt from 'react-wordart';
+// <WordArt text='Amplify' theme={`blues`} fontSize={100}>
 
 
 // import css file
@@ -21,7 +22,7 @@ import '../App.css'; // Import your custom CSS file
 const Home = () => {
   return (
     <div className="container">
-      <h1 className="center"><WordArt text='Amplify' theme={`blues`} fontSize={100} /></h1>
+      <h1 className="center"><Text style={{textSize: 100, color: "blue"}}>Amplify</Text></h1>
       <div className="toolbar">
         {/* <Link to="/" className="toolbar-link" data-text="Home">
           <FontAwesomeIcon icon={faSpotify} beat size="lg" style={{ color: "#1aa23c" }} />

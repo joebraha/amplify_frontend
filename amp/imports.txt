@@ -20,3 +20,6 @@ npm install react-icons
 npm install @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
 npm install @fortawesome/free-solid-svg-icons
 npm install react-wordart
+
+
+npm install react-scripts axios react-icons  @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons @fortawesome/free-solid-svg-icons react-wordart
