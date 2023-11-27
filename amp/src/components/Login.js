@@ -1,9 +1,8 @@
-import React, { useState } from "react"; 
+import React, { useState, useEffect } from "react"; 
 // importing Link from react-router-dom to navigate to  
 // different end points. 
 import { Link } from "react-router-dom"; 
-import { useState, useEffect } from "react";
-import api from './api'
+import api from '../api'
 import "../App.css";
   
 
@@ -17,7 +16,7 @@ const Login = () => {
   const formSubmit = async (event) => {
     event.preventDefault();
     console.log("submitting...")
-    result = await api.post('/login', {username, password});
+    result = await fetch('http://54.177.116.231:8000');
     setUser("");
     setPass("");
     console.log(result);
