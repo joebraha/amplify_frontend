@@ -11,12 +11,12 @@ import "../App.css";
 const Login = () => { 
   const [username, setUser] = useState("");
   const [password, setPass] = useState("");
-  const result = {};
+  let result = {};
 
   const formSubmit = async (event) => {
     event.preventDefault();
     console.log("submitting...")
-    result = await fetch('http://54.177.116.231:8000');
+    result = await fetch('http://localhost:8000', {mode: 'no-cors'});
     setUser("");
     setPass("");
     console.log(result);
