@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+// import audios from "../audios/audios";
+// import { index } from 'react-native'; 
 
 // Import audio files
-import audio1 from "../audios/audio1.wav";
-import audio2 from "../audios/audio2.wav";
 import audio3 from "../audios/audio3.wav";
 import audio4 from "../audios/audio4.wav";
+// import audio3 from "/Users/emmawilkins/Desktop/amplify_frontend/audios/audio3.wav";
+// import audio4 from "/Users/emmawilkins/Desktop/amplify_frontend/audios/audio4.wav";
 
 const Playlists = () => {
-  const [buttonNames, setButtonNames] = useState(["Play", "Play", "Play", "Play"]);
-  const audios = [audio1, audio2, audio3, audio4];
-  const audioRefs = new Array(4).fill(null);
+  const [buttonNames, setButtonNames] = useState(["Play", "Play"]);
+  const audios = [audio3, audio4];
+  const audioRefs = new Array(2).fill(null);
 
   const handleButtonClick = (index) => {
     const newButtonNames = [...buttonNames];
@@ -24,13 +26,13 @@ const Playlists = () => {
     setButtonNames(newButtonNames);
   };
 
-  const handleFileChange = (e, index) => {
-    if (e.target.files[0]) {
-      const newAudios = [...audios];
-      newAudios[index] = URL.createObjectURL(e.target.files[0]);
-      setAudios(newAudios);
-    }
-  };
+  // const handleFileChange = (e, index) => {
+  //   if (e.target.files[0]) {
+  //     const newAudios = [...audios];
+  //     newAudios[index] = URL.createObjectURL(e.target.files[0]);
+  //     setAudios(newAudios);
+  //   }
+  // };
 
   useEffect(() => {
     audios.forEach((audio, index) => {
@@ -61,7 +63,7 @@ const Playlists = () => {
       {[...Array(5)].map((_, index) => (
         <div key={index}>
           <button onClick={() => handleButtonClick(index)}>{buttonNames[index]}</button>
-          <input type="file" onChange={(e) => handleFileChange(e, index)} />
+          {/* <input type="file" onChange={(e) => handleFileChange(e, index)} /> */}
         </div>
       ))}
       <li>
