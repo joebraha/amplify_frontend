@@ -23,3 +23,5 @@ npm install react-wordart
 
 
 npm install react-scripts axios react-icons  @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons @fortawesome/free-solid-svg-icons react-wordart
+
+npm install react-native-web 

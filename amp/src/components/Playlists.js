@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // import audios from "../audios/audios";
 // import { index } from 'react-native'; 
 
-// Import audio files
+// Import audio files -- instead we need to get audio files from the database
 import audio3 from "../audios/audio3.wav";
 import audio4 from "../audios/audio4.wav";
 // import audio3 from "/Users/emmawilkins/Desktop/amplify_frontend/audios/audio3.wav";
@@ -73,25 +73,4 @@ const Playlists = () => {
   );
 };
 
-export default Playlists;
-
-
-// //TODO: Fill with saved playlists
-// const Playlists = () => { 
-
-
-//   return ( 
-//     <div> 
-//       <h1>Saved Playlists</h1> 
-//       <br /> 
-//       <ul>
-//       </ul>
-//       <li> 
-//           {/* Endpoint to route to Home Page */} 
-//           <Link to="/">Return to Home</Link> {}
-//       </li>
-//     </div> 
-//   ); 
-// }; 
-  
-// export default Playlists; 
+export default Playlists; 
