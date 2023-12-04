@@ -1,28 +1,56 @@
-import React, { useState } from "react"; 
-// importing Link from react-router-dom to navigate to  
-// different end points. 
-import { Link } from "react-router-dom"; 
-import { useEffect } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import '../App.css';
 
-//Put url of page to send prompt data to in action field below
-const Prompt = () => { 
-  return ( 
-    <div className = "App"> 
-    <header className = "App-header">
-      <h1>Prompt-Based Generation</h1>
-      <br />
-        <form action="/" method="GET"> 
-            <p>Please type in your song prompt below:</p>
-            <input type="text"/>
+const Prompt = () => {
+  const [promptText, setPromptText] = useState("");
+
+  const handlePromptSubmit = (event) => {
+    event.preventDefault();
+
+    const apiUrl = ""; // api url from co lab goes here
+
+    // Data to be sent to the server
+    const requestData = {
+      prompt: promptText
+    };
+
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(requestData)
+    })
+    .then(response => {
+      // response from server - sends back song files
+      console.log("Response received:", response);
+    })
+    .catch(error => {
+      console.error("Error sending data:", error);
+    });
+  };
+
+  const handleInputChange = (event) => {
+    setPromptText(event.target.value);
+  };
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Prompt-Based Generation</h1>
+        <br />
+        <form onSubmit={handlePromptSubmit}>
+          <p>Please type in your song prompt below:</p>
+          <input type="text" value={promptText} onChange={handleInputChange} />
+          <button type="submit">Submit Prompt</button>
         </form>
-        <li> 
-          {/* Endpoint to route to Home Page */} 
-          <Link to="/">Return to Home</Link> {}
+        <li>
+          <Link to="/">Return to Home</Link>
         </li>
       </header>
-    </div> 
-  ); 
-}; 
-  
-export default Prompt; 
+    </div>
+  );
+};
+
+export default Prompt;
