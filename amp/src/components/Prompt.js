@@ -5,22 +5,18 @@ import '../App.css';
 const Prompt = () => {
   const [promptText, setPromptText] = useState("");
 
-  const handlePromptSubmit = (event) => {
+  const handlePromptSubmit = async (event) => {
     event.preventDefault();
 
-    const apiUrl = ""; // api url from co lab goes here
+    const apiUrl = "localhost:8000/generate"; // api url from backend goes here (then backend gets from Colab, saves it, and send it back here)
 
-    // Data to be sent to the server
-    const requestData = {
-      prompt: promptText
-    };
 
-    fetch(apiUrl, {
-      method: "POST",
+    await fetch(apiUrl, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(requestData)
+      body: promptText
     })
     .then(response => {
       // response from server - sends back song files
