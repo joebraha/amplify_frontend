@@ -1,53 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-// import audios from "../audios/audios";
-// import { index } from 'react-native'; 
-
-// Import audio files -- instead we need to get audio files from the database
 import audio3 from "../audios/audio3.wav";
 import audio4 from "../audios/audio4.wav";
-// import audio3 from "/Users/emmawilkins/Desktop/amplify_frontend/audios/audio3.wav";
-// import audio4 from "/Users/emmawilkins/Desktop/amplify_frontend/audios/audio4.wav";
 
 const Playlists = () => {
+  const [songs, setSongs] = useState([{ title: "Song 1", url: audio3 }, { title: "Song 2", url: audio4 }]);
+  const [isplaying, setisplaying] = useState(false);
+  const [currentSong, setCurrentSong] = useState(songs[0]);
   const [buttonNames, setButtonNames] = useState(["Play", "Play"]);
-  const audios = [audio3, audio4];
-  const audioRefs = new Array(2).fill(null);
-
-  const handleButtonClick = (index) => {
-    const newButtonNames = [...buttonNames];
-    if (newButtonNames[index] === "Play") {
-      audioRefs[index].play();
-      newButtonNames[index] = "Pause";
-    } else {
-      audioRefs[index].pause();
-      newButtonNames[index] = "Play";
-    }
-    setButtonNames(newButtonNames);
-  };
-
-  // const handleFileChange = (e, index) => {
-  //   if (e.target.files[0]) {
-  //     const newAudios = [...audios];
-  //     newAudios[index] = URL.createObjectURL(e.target.files[0]);
-  //     setAudios(newAudios);
-  //   }
-  // };
+  const audioRefs = useRef([]);
 
   useEffect(() => {
-    audios.forEach((audio, index) => {
-      if (audio) {
-        audioRefs[index] = new Audio(audio);
-        audioRefs[index].onended = () => {
+    songs.forEach((audio, index) => {
+      if (audio.url) {
+        audioRefs.current[index] = new Audio(audio.url);
+        audioRefs.current[index].addEventListener("canplaythrough", () => {
+          const newButtonNames = [...buttonNames];
+          newButtonNames[index] = "Play";
+          setButtonNames(newButtonNames);
+        });
+        audioRefs.current[index].onended = () => {
           const newButtonNames = [...buttonNames];
           newButtonNames[index] = "Play";
           setButtonNames(newButtonNames);
         };
       }
     });
-    // Cleanup function to release resources when component unmounts
+
     return () => {
-      audioRefs.forEach((audioRef) => {
+      audioRefs.current.forEach((audioRef) => {
         if (audioRef) {
           audioRef.pause();
           audioRef.src = "";
@@ -55,15 +36,32 @@ const Playlists = () => {
         }
       });
     };
-  }, [audios, buttonNames]);
+  }, [songs, buttonNames]);
+
+  const handleButtonClick = (index) => {
+    const newButtonNames = [...buttonNames];
+
+    if (newButtonNames[index] === "Play") {
+      if (audioRefs.current[index].paused) {
+        audioRefs.current[index].play().catch((error) => {
+          console.error("Error playing audio:", error);
+        });
+        newButtonNames[index] = "Pause";
+      }
+    } else {
+      audioRefs.current[index].pause();
+      newButtonNames[index] = "Play";
+    }
+
+    setButtonNames(newButtonNames);
+  };
 
   return (
     <div>
       <h1>Saved Playlists - Audio Player</h1>
-      {[...Array(5)].map((_, index) => (
+      {[...Array(songs.length)].map((_, index) => (
         <div key={index}>
           <button onClick={() => handleButtonClick(index)}>{buttonNames[index]}</button>
-          {/* <input type="file" onChange={(e) => handleFileChange(e, index)} /> */}
         </div>
       ))}
       <li>
@@ -73,4 +71,4 @@ const Playlists = () => {
   );
 };
 
-export default Playlists; 
+export default Playlists;
