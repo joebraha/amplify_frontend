@@ -1,76 +1,99 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+const CLIENT_ID = "YOUR_SPOTIFY_CLIENT_ID";
+const REDIRECT_URI = "YOUR_REDIRECT_URI";
+const AUTH_ENDPOINT = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=token&show_dialog=true`;
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
 
 const SpotifyGetPlaylists = () => {
-    // State variables to store data obtained from the API call
-    const [token, setToken] = useState("");
+    const [accessToken, setAccessToken] = useState("");
     const [playlists, setPlaylists] = useState([]);
-    const [selectedPlaylistTracks, setSelectedPlaylistTracks] = useState([]);
-
-    // Function to fetch playlists from Spotify
-    const fetchPlaylists = async () => {
-        try {
-            const response = await axios.get(PLAYLISTS_ENDPOINT, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setPlaylists(response.data.items || []);
-        } catch (error) {
-            console.error("Error fetching playlists: ", error);
-        }
-    };
-
-    // Get token from localStorage on component mount
+  
     useEffect(() => {
-        const storedToken = localStorage.getItem("accessToken");
-        if (storedToken) {
-            setToken(storedToken);
-        }
+      const url = window.location.href;
+      const _accessToken = url.match(/#(?:access_token)=([\S\s]*?)&/)?.[1] || "";
+  
+      if (_accessToken) {
+        setAccessToken(_accessToken);
+        fetchPlaylists(_accessToken);
+      }
     }, []);
-
-    // Function to fetch tracks of a selected playlist
-    const getPlaylistTracks = async (playlistId) => {
-        try {
-            const response = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+  
+    const fetchPlaylists = async (token) => {
+      try {
+        const response = await axios.get(PLAYLISTS_ENDPOINT, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        const playlistsData = response.data.items || [];
+        const playlistsWithGenres = await Promise.all(
+          playlistsData.map(async (playlist) => {
+            try {
+              const tracksResponse = await axios.get(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                  Authorization: `Bearer ${token}`,
                 },
-            });
-            setSelectedPlaylistTracks(response.data.items || []);
-        } catch (error) {
-            console.error("Error fetching playlist tracks: ", error);
-        }
+              });
+  
+              const trackItems = tracksResponse.data.items || [];
+              const genres = new Set();
+  
+              await Promise.all(trackItems.map(async (track) => {
+                const artists = track.track.artists || [];
+                await Promise.all(artists.map(async (artist) => {
+                  if (artist?.id) {
+                    try {
+                      const artistResponse = await axios.get(`https://api.spotify.com/v1/artists/${artist.id}`, {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                      });
+  
+                      const artistGenres = artistResponse.data.genres || [];
+                      artistGenres.forEach((genre) => genres.add(genre));
+                    } catch (error) {
+                      console.error("Error fetching artist details: ", error);
+                    }
+                  }
+                }));
+              }));
+  
+              const playlistGenres = [...genres];
+              const randomGenre = playlistGenres[Math.floor(Math.random() * playlistGenres.length)];
+  
+              return {
+                name: playlist.name,
+                genre: randomGenre || "No genres found",
+              };
+            } catch (error) {
+              console.error("Error fetching tracks for playlist: ", error);
+              return { name: playlist.name, genre: "No genres found" };
+            }
+          })
+        );
+  
+        setPlaylists(playlistsWithGenres);
+      } catch (error) {
+        console.error("Error fetching playlists: ", error);
+      }
     };
-
+  
     return (
-        <div>
-            <button onClick={fetchPlaylists}>Get Playlists</button>
-            <ul>
-                {playlists.map((playlist) => (
-                    <li key={playlist.id}>
-                        <button onClick={() => getPlaylistTracks(playlist.id)}>{playlist.name}</button>
-                    </li>
-                ))}
-            </ul>
-            <h2>Selected Playlist Tracks</h2>
-            <ul>
-                {selectedPlaylistTracks.map((track) => (
-                    <li key={track.track.id}>
-                        <p>Name: {track.track.name}</p>
-                        <p>Track URI: {track.track.uri}</p>
-                        <p>Popularity: {track.track.popularity}</p>
-                        <p>Album: {track.track.album.name}</p>
-                        <p>Main Artist: {track.track.artists[0].name}</p>
-                        <p>Artist Popularity: {track.track.artists[0].popularity}</p>
-                        <p>Genres: {track.track.artists[0]?.genres ? track.track.artists[0].genres.join(", ") : 'N/A'}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+      <div>
+        <h1>Playlists with Random Genre</h1>
+        <ul>
+          {playlists.map((playlist, index) => (
+            <li key={index}>
+              <strong>Name: </strong>{playlist.name} <br />
+              <strong>Random Genre: </strong>{playlist.genre}
+            </li>
+          ))}
+        </ul>
+      </div>
     );
-};
-
-export default SpotifyGetPlaylists;
+  };
+  
+  export default SpotifyGetPlaylists;

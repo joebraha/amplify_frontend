@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import api from '../api'
 import "../App.css";
   
-
-
 //Todo: fill in with contact information
 const Login = () => { 
   const [username, setUser] = useState("");
