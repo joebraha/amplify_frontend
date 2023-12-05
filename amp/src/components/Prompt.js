@@ -8,15 +8,14 @@ const Prompt = () => {
   const handlePromptSubmit = async (event) => {
     event.preventDefault();
 
-    const apiUrl = "localhost:8000/generate"; // api url from backend goes here (then backend gets from Colab, saves it, and send it back here)
+    const apiUrl = "localhost:8000/generate/"; // api url from backend goes here (then backend gets from Colab, saves it, and send it back here)
 
+    // formData = new FormData()
+    // formData.append('input', promptText)
 
-    await fetch(apiUrl, {
+    await fetch(apiUrl+promptText, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: promptText
+      // body: formData
     })
     .then(response => {
       // response from server - sends back song files
