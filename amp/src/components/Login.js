@@ -14,7 +14,7 @@ const Login = () => {
   const formSubmit = async (event) => {
     event.preventDefault();
     console.log("submitting...")
-    result = await fetch('http://localhost:8000', {mode: 'no-cors'});
+    result = await api.post('/login', {username, password});
     setUser("");
     setPass("");
     console.log(result);
@@ -39,6 +39,12 @@ const Login = () => {
             <input type="submit" value="Submit"/>
         </form>
       <u>
+        <p></p>
+        </u>
+        <u>
+          <Link to="../CreateAccount">Create Account</Link>
+        </u>
+        <u>
         <p>amplifyb36@gmail.com</p>
       </u>
       <li> 

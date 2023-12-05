@@ -8,6 +8,7 @@ import Playlists from './components/Playlists';
 import ContactUs from './components/ContactUs';
 import Login from './components/Login';
 import Artists from './components/Artists';
+import CreateAccount from './components/CreateAccount';
 
 
 const Navbar = () => {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/playlists" element={<Playlists/>}/>
         <Route path="/contactus" element={<ContactUs/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/CreateAccount" element={<CreateAccount/>}/>
       </Routes>
     </BrowserRouter>
   );
