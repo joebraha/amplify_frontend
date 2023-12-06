@@ -1,69 +1,38 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import audio3 from "../audios/audio3.wav";
-import audio4 from "../audios/audio4.wav";
+import Player from "../Player/Player";
+import audio1 from "../Player/audios/audio3.wav";
+import audio2 from "../Player/audios/audio4.wav";
 
 const Playlists = () => {
-  const [songs, setSongs] = useState([{ title: "Song 1", url: audio3 }, { title: "Song 2", url: audio4 }]);
+  const audio_arr = [audio1, audio2]
+  const [songs, setSongs] = useState(audio_arr);
   const [isplaying, setisplaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(songs[0]);
-  const [buttonNames, setButtonNames] = useState(["Play", "Play"]);
-  const audioRefs = useRef([]);
+
+  const audioElem = useRef(); 
 
   useEffect(() => {
-    songs.forEach((audio, index) => {
-      if (audio.url) {
-        audioRefs.current[index] = new Audio(audio.url);
-        audioRefs.current[index].addEventListener("canplaythrough", () => {
-          const newButtonNames = [...buttonNames];
-          newButtonNames[index] = "Play";
-          setButtonNames(newButtonNames);
-        });
-        audioRefs.current[index].onended = () => {
-          const newButtonNames = [...buttonNames];
-          newButtonNames[index] = "Play";
-          setButtonNames(newButtonNames);
-        };
-      }
-    });
-
-    return () => {
-      audioRefs.current.forEach((audioRef) => {
-        if (audioRef) {
-          audioRef.pause();
-          audioRef.src = "";
-          audioRef.load();
-        }
-      });
-    };
-  }, [songs, buttonNames]);
-
-  const handleButtonClick = (index) => {
-    const newButtonNames = [...buttonNames];
-
-    if (newButtonNames[index] === "Play") {
-      if (audioRefs.current[index].paused) {
-        audioRefs.current[index].play().catch((error) => {
-          console.error("Error playing audio:", error);
-        });
-        newButtonNames[index] = "Pause";
-      }
+    if(isplaying) {
+      audioElem.current.play();
     } else {
-      audioRefs.current[index].pause();
-      newButtonNames[index] = "Play";
+      audioElem.current.pause();
     }
+  }, [isplaying, currentSong]);
 
-    setButtonNames(newButtonNames);
-  };
+  const onPlay = () => {
+    const duration = audioElem.current.duration;
+    const currentTime = audioElem.current.currentTime;
+
+    setCurrentSong({...currentSong, "progress": currentTime/duration * 100, "length": duration}); 
+  }
 
   return (
     <div>
       <h1>Saved Playlists - Audio Player</h1>
-      {[...Array(songs.length)].map((_, index) => (
-        <div key={index}>
-          <button onClick={() => handleButtonClick(index)}>{buttonNames[index]}</button>
-        </div>
-      ))}
+      {/* Fix the event name here, change onPlaying to onPlay */}
+      <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlay} />
+      <Player songs={songs} setSongs={setSongs} isplaying={isplaying} setisplaying={setisplaying} audioElem={audioElem} currentSong={currentSong} setCurrentSong={setCurrentSong} />
       <li>
         <Link to="/">Return to Home</Link>
       </li>
