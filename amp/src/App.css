@@ -3,6 +3,10 @@ body {
   background-color: #282c34; /* Set background color to match App-header */
 }
 
+body {
+  font-family: 'Indie Flower', cursive;
+}
+
 .App {
   text-align: center;
 }
@@ -59,6 +63,7 @@ body {
   content: attr(data-text); /* Initially set content to data-text attribute */
   position: absolute;
   opacity: 0; /* Initially set opacity to 0 */
+  color: #e60f0f;
   transition: opacity 0.3s ease-in-out; /* Add transition effect */
 }
 
@@ -76,4 +81,45 @@ body {
 .center {
   text-align: center; /* Center align the content within this div */
   margin-top: 20px; /* Add some space above the centered content */
+}
+/* CSS for the 2x2 button grid layout */
+.button-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  grid-template-rows: repeat(2, auto); /* Two rows */
+  grid-gap: 20px;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.audio-button {
+  height: 120px;
+  font-size: 18px;
+  padding: 15px;
+  border: 2px solid #333;
+  background-color: #282c34;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audio-button:hover {
+  background-color: #af1a1a;
+}
+
+.audio-button svg {
+  margin-right: 10px;
 }
