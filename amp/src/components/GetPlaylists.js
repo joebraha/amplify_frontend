@@ -64,9 +64,9 @@ const SpotifyGetPlaylists = () => {
               const playlistGenres = [...genres];
               const randomGenre = playlistGenres[Math.floor(Math.random() * playlistGenres.length)];
               // If random genre is a null value choose a new random genre
-              if(randomGenre == "Genre Not Found") {
-                randomGenre - playlistGenres[Math.floor(Math.random() * playlistGenres.length)];
-              }
+              // if(randomGenre == "Genre Not Found") {
+              //   randomGenre - playlistGenres[Math.floor(Math.random() * playlistGenres.length)];
+              // }
               return {
                 name: playlist.name,
                 genre: randomGenre,
