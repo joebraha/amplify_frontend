@@ -10,26 +10,29 @@ const Prompt = () => {
 
   };
 
-  const handlePromptSubmit = async (event) => {
-    event.preventDefault();
+  // const handlePromptSubmit = async (event) => {
+  //   event.preventDefault();
 
-    const apiUrl = "localhost:8000/generate/"; // api url from backend goes here (then backend gets from Colab, saves it, and send it back here)
+  //   const apiUrl = "localhost:8000/generate/"; // api url from backend goes here (then backend gets from Colab, saves it, and send it back here)
 
-    // formData = new FormData()
-    // formData.append('input', promptText)
+  //   // formData = new FormData()
+  //   // formData.append('input', promptText)
 
-    await fetch(apiUrl+normalize(promptText), {
-      method: "GET",
-      // body: formData
-    })
-    .then(response => {
-      // response from server - sends back song files
-      console.log("Response received:", response);
-    })
-    .catch(error => {
-      console.error("Error sending data:", error);
-    });
-  };
+  //   // Make a request to the backend
+  //   await fetch(apiUrl + normalize(promptText))
+  //     .then(async (response) => {
+  //       if (response.ok) {
+  //         const blob = await response.blob(); // Get the response as a blob
+  //         const url = URL.createObjectURL(blob); // Create a URL for the blob
+  //         setFileUrl(url); // Set the URL in state to display the file
+  //       } else {
+  //         console.error("Error generating file:", response.statusText);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // };
 
   const handleInputChange = (event) => {
     setPromptText(event.target.value);
@@ -40,17 +43,21 @@ const Prompt = () => {
       <header className="App-header">
         <h1>Prompt-Based Generation</h1>
         <br />
-        <form onSubmit={handlePromptSubmit}>
+        {/* <form onSubmit={handlePromptSubmit}>
           <p>Please type in your song prompt below:</p>
           <input type="text" value={promptText} onChange={handleInputChange} />
           <button type="submit">Submit Prompt</button>
-        </form>
-        {fileUrl && (
+        </form> */}
+        {/* {fileUrl && (
           <div>
+            <audio controls>
+              <source src={fileUrl} type="audio/wav" />
+              browser does not support the audio element.
+            </audio>
             <p>Download your generated file:</p>
             <a href={fileUrl} download="generated_file.wav">Download File</a>
           </div>
-        )}
+        )} */}
         <li>
           <Link to="/">Return to Home</Link>
         </li>

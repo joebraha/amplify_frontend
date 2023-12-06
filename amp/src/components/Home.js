@@ -13,18 +13,18 @@ import audio4 from "../Player/audios/audio4.wav";
 import axios from 'axios';
 
 const Home = () => {
-  // const audioFiles = [audio1, audio2, audio3, audio4];
-  const [audioFiles, setAudioFiles] = useState([]);
+  const audioFiles = [audio1, audio2, audio3, audio4];
+  // const [audioFiles, setAudioFiles] = useState([]);
   
-  useEffect(() => {
-    axios.get('/api/post_recent_music')
-    .then((response) => {
-      setAudioFiles(response.data)
-    })
-    .catch((error) => {
-      console.log("error getting wav files: ", error)
-    });
-  },[]);
+  // useEffect(() => {
+  //   axios.get('/api/post_recent_music')
+  //   .then((response) => {
+  //     setAudioFiles(response.data)
+  //   })
+  //   .catch((error) => {
+  //     console.log("error getting wav files: ", error)
+  //   });
+  // },[]);
 
   return (
     <div className="container">
