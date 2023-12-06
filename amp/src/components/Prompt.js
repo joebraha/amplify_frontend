@@ -4,7 +4,9 @@ import '../App.css';
 
 const Prompt = () => {
   const [promptText, setPromptText] = useState("");
-  const [fileUrl, setFileUrl] = useState(null);
+  // const [fileUrl, setFileUrl] = useState(null);
+  // test fileUrl
+  const [fileUrl, setFileUrl] = useState("/Users/emmawilkins/Desktop/amplify_frontend/amp/src/Player/audios/audio1.wav");
 
   const normalize = text => {
     return text.replace(/ /g, '-');
@@ -49,7 +51,7 @@ const Prompt = () => {
           <input type="text" value={promptText} onChange={handleInputChange} />
           <button type="submit">Submit Prompt</button>
         </form>
-        {/* {fileUrl && (
+        {fileUrl && (
           <div>
             <audio controls>
               <source src={fileUrl} type="audio/wav" />
@@ -58,7 +60,7 @@ const Prompt = () => {
             <p>Download your generated file:</p>
             <a href={fileUrl} download="generated_file.wav">Download File</a>
           </div>
-        )} */}
+        )}
         
         <Link to="/">Return to Home</Link>
       </header>
