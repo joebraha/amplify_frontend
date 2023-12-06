@@ -45,6 +45,12 @@ const Prompt = () => {
           <input type="text" value={promptText} onChange={handleInputChange} />
           <button type="submit">Submit Prompt</button>
         </form>
+        {fileUrl && (
+          <div>
+            <p>Download your generated file:</p>
+            <a href={fileUrl} download="generated_file.wav">Download File</a>
+          </div>
+        )}
         <li>
           <Link to="/">Return to Home</Link>
         </li>
