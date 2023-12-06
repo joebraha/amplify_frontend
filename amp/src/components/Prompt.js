@@ -5,6 +5,11 @@ import '../App.css';
 const Prompt = () => {
   const [promptText, setPromptText] = useState("");
 
+  const normalize = text => {
+    return text.replace(/ /g, '-');
+
+  };
+
   const handlePromptSubmit = async (event) => {
     event.preventDefault();
 
@@ -13,7 +18,7 @@ const Prompt = () => {
     // formData = new FormData()
     // formData.append('input', promptText)
 
-    await fetch(apiUrl+promptText, {
+    await fetch(apiUrl+normalize(promptText), {
       method: "GET",
       // body: formData
     })
