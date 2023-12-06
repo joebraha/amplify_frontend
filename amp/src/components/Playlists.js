@@ -15,7 +15,7 @@ const Playlists = () => {
   const [audioFiles, setAudioFiles] = useState([]);
   
   useEffect(() => {
-    axios.get('/api/get_wav_files')
+    axios.get('/api/post_user_playlist')
     .then((response) => {
       setAudioFiles(response.data)
     })
