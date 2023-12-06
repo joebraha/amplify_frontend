@@ -59,7 +59,7 @@ const CreateAccount = () => {
   return ( 
     <div className = "App">
       <header className = "App-header">
-      <h1>CreateAccount</h1> 
+      <h1>Create Account</h1> 
       <br /> 
       <form onSubmit={handleChangeUser}> {/* send to backend */}
             <p>Username:</p>
@@ -77,13 +77,10 @@ const CreateAccount = () => {
       <u>
         <p></p>
       </u>
-      <u>
-        <p>amplifyb36@gmail.com</p>
-      </u>
-      <li> 
+      <h2 className="center"> 
           {/* Endpoint to route to Home Page */} 
           <Link to="/">Return to Home</Link> {}
-      </li>
+      </h2>
       </header>
     </div> 
   ); 

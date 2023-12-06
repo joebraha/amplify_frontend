@@ -28,9 +28,10 @@ const Playlists = () => {
     <div>
       <h1 className="center">Your Songs</h1>
       <DisplayWav audioFiles={audioFiles} />
-      <li className="center"> 
-          <Link to="/">Return to Home</Link> {}
-      </li>
+      <br />
+      <h2 className="center">
+        <Link to="/">Return to Home</Link> {}
+      </h2>
     </div>
   );
 };

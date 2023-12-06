@@ -20,10 +20,10 @@ const ContactUs = () => {
       <u>
         <p>amplifyb36@gmail.com</p>
       </u>
-      <li> 
+      <h2 className="center"> 
           {/* Endpoint to route to Home Page */} 
           <Link to="/">Return to Home</Link> {}
-      </li>
+      </h2>
       </header>
     </div> 
   ); 
