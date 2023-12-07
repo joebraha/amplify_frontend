@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const CLIENT_ID = "c0e9c73676684f3e8d10acc56b94be60";
-const REDIRECT_URI = "http://localhost:3000/artists"; // TODO: add url/spotify to redirect_url allow list
+const REDIRECT_URI = "http://localhost:3000/artists"; 
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
 
