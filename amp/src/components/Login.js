@@ -1,41 +1,58 @@
 import React, { useState, useEffect } from "react"; 
 // importing Link from react-router-dom to navigate to  
 // different end points. 
-import { Link } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom"; 
 import api from '../api'
 import "../App.css";
   
 //Todo: fill in with contact information
 const Login = () => { 
-  const [username, setUser] = useState("");
-  const [password, setPass] = useState("");
-  let result = {};
+  const navigate = useNavigate();
 
-  const formSubmit = async (event) => {
+  const [loginData, setLoginData] = useState({
+    username: "",
+    password: "",
+});
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    setLoginData({
+        ...loginData,
+        [name]: value,
+    });
+  };
+
+  const handleLogin = async (event) => {
     event.preventDefault();
-    console.log("submitting...")
-    result = await api.post('/login', {username, password});
-    setUser("");
-    setPass("");
-    console.log(result);
-  }
-  const handleChangeUser = (event) => {
-    setUser(event.target.value);
-  }
-  const handleChangePass = (event) => {
-    setPass(event.target.value);
-  }
+
+    try {
+      console.log(loginData);
+      const response = await fetch(`http://localhost:8000/get_user/${loginData.username}`);
+      const user = await response.json();
+
+      console.log("User found:", user);
+      setLoginData({
+        username: "",
+        password: "",
+      });
+      // You can handle the successful login here, e.g., redirect to another page
+      navigate("/playlists");
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
+  };
 
   return ( 
     <div className = "App">
       <header className = "App-header">
       <h1>Login</h1> 
       <br /> 
-      <form onSubmit={formSubmit}> {/* send to backend */}
+      <form onSubmit={handleLogin}> {/* send to backend */}
             <p>Username:</p>
-            <input type="text" value={username} onChange={handleChangeUser}/>
+            <input type="text" name="username" onChange={handleInputChange} value={loginData.username}/>
             <p>Password:</p>
-            <input type="text" value={password} onChange={handleChangePass}/>
+            <input type="text" name="password" onChange={handleInputChange} value={loginData.password}/>
             <input type="submit" value="Submit"/>
         </form>
       <u>
