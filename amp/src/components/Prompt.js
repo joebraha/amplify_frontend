@@ -6,6 +6,7 @@ import api from "../api";
 const Prompt = () => {
   const [promptText, setPromptText] = useState("");
   const [fileUrl, setFileUrl] = useState(null);
+  const [loading, setLoading] = useState(false); // State to manage loading
 
   const normalize = text => {
     return text.replace(/ /g, '-');
@@ -13,16 +14,20 @@ const Prompt = () => {
 
   const handlePromptSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true); // Set loading to true when submitting
 
-    api.get(`/generate/${normalize(promptText)}`, {    responseType: 'blob'  })
-    .then(async (response) => {
-      console.log(response);
+    try {
+      const response = await api.get(`/generate/${normalize(promptText)}`, {
+        responseType: 'blob'
+      });
+
       const url = URL.createObjectURL(response.data);
       setFileUrl(url);
-    })
-    .catch((error) => {
-      console.log("error getting wav files: ", error)
-    });
+    } catch (error) {
+      console.log("Error getting wav files: ", error);
+    } finally {
+      setLoading(false); // Set loading to false after receiving response or error
+    }
   };
 
   const handleInputChange = (event) => {
@@ -39,6 +44,7 @@ const Prompt = () => {
           <input type="text" value={promptText} onChange={handleInputChange} />
           <button type="submit">Submit Prompt</button>
         </form>
+        {loading && <p>Loading...</p>}
         {fileUrl && (
           <div>
             <audio controls>
@@ -49,7 +55,6 @@ const Prompt = () => {
             <a href={fileUrl} download="generated_file.wav">Download File</a>
           </div>
         )}
-        
         <Link to="/">Return to Home</Link>
       </header>
     </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../api";
 
 const CLIENT_ID = "YOUR_SPOTIFY_CLIENT_ID";
 const REDIRECT_URI = "localhost/spotify"; // change to app url
@@ -9,6 +10,12 @@ const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
 const SpotifyGetPlaylists = () => {
   const [accessToken, setAccessToken] = useState("");
   const [playlists, setPlaylists] = useState([]);
+  const [loadingAudio, setLoadingAudio] = useState(false);
+  const [fileUrl, setFileUrl] = useState(null);
+
+  const normalize = text => {
+    return text.replace(/ /g, '-');
+  };
 
   useEffect(() => {
     const url = window.location.href;
@@ -78,17 +85,27 @@ const SpotifyGetPlaylists = () => {
     } catch (error) {
       console.error("Error fetching playlists: ", error);
     }
-  };
 
-  const handleGenreClick = async (genre) => {
-    // Handle clicking on genre buttons - You'd put your API call logic here
-    // For demonstration purposes, I'll just log the genre clicked
-    console.log("Clicked Genre:", genre);
+    };
 
-    // Perform actions with the clicked genre - make API requests, etc.
-    
+    const handleGenreClick = async (genre) => {
+      // Perform actions with the clicked genre - make API requests, etc.
+      try {
+        setLoadingAudio(true); // Set loading to true when generating audio
+        const response = await api.get(`/generate/${normalize(genre)}`, {
+          responseType: 'blob'
+        });
+  
+        const url = URL.createObjectURL(response.data);
+        setFileUrl(url);
+      } catch (error) {
+        console.error("Error generating audio: ", error);
+      } finally {
+        setLoadingAudio(false); // Set loading to false after receiving response or error
+      }
+    };
 
-  };
+
 
   return (
     <div>
