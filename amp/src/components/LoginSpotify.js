@@ -39,7 +39,7 @@ const LoginSpotify = () => {
   }, []);
 
   const sendTokenToBackend = (token) => {
-    // Send a POST request to your backend endpoint /api/login
+    // Send a POST request to backend endpoint /api/login
     fetch('/api/login', {
       method: 'POST',
       headers: {

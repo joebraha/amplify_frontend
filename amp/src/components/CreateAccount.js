@@ -2,7 +2,6 @@ import React, { useState } from "react";
 // importing Link from react-router-dom to navigate to  
 // different end points. 
 import { Link, useNavigate } from "react-router-dom"; 
-import api from '../api'
 import "../App.css";  
 
 
@@ -33,16 +32,13 @@ const CreateAccount = () => {
 
     try {
       console.log(loginData);
-      // const response = await api.post("http://localhost:8000/CreateAccount",loginData);
       console.log("Sending request to:", 'http://localhost:8000/CreateAccount/');
       await fetch('http://localhost:8000/CreateAccount/', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        // mode: 'no-cors', 
         body: JSON.stringify(loginData)});
-      // console.log("User created successfully:", response.data);
       console.log("User created successfully:");
       // Clear the form after successful submission
       setLoginData({
@@ -62,7 +58,7 @@ const CreateAccount = () => {
       <header className = "App-header">
       <h1>Create Account</h1> 
       <br /> 
-      <form onSubmit={handleChangeUser}> {/* send to backend */}
+      <form onSubmit={handleChangeUser}>
             <p>Username:</p>
             <input type="text" name="username" onChange={handleInputChange} value = {loginData.username}/>
             <p>Password:</p>

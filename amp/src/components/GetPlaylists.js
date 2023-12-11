@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const CLIENT_ID = "YOUR_SPOTIFY_CLIENT_ID";
-const REDIRECT_URI = "YOUR_REDIRECT_URI";
+const REDIRECT_URI = "localhost/____";
 const AUTH_ENDPOINT = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=token&show_dialog=true`;
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
 

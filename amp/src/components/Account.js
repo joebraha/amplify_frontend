@@ -1,8 +1,7 @@
-import React, { useState } from "react"; 
+import React from "react"; 
 // importing Link from react-router-dom to navigate to  
 // different end points. 
 import { Link } from "react-router-dom"; 
-import { useEffect } from "react";
 import "../App.css";
 
 const Account = () => { 

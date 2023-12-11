@@ -10,7 +10,6 @@ import audio4 from "../Player/audios/audio4.wav";
 import axios from 'axios';
 
 const Playlists = () => {
-  // const audioFiles = [audio1, audio2, audio3, audio4]
   // below is to be used when Api connection is ready 
   const [audioFiles, setAudioFiles] = useState([]);
   

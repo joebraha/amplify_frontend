@@ -14,26 +14,9 @@ const Prompt = () => {
   const handlePromptSubmit = async (event) => {
     event.preventDefault();
 
-    // const apiUrl = `http://localhost:8000/generate/${normalize(promptText)}`;
-
-    // try {
-    //   const response = await fetch(apiUrl, {mode: "no-cors"});
-    //   console.log(response);
-    //   if (response.ok) {
-    //     const blob = await response.blob();
-    //     const url = URL.createObjectURL(blob);
-    //     setFileUrl(url);
-    //   } else {
-    //     console.error("Error generating file:", response.statusText);
-    //   }
-    // } catch (error) {
-    //   console.error("Error fetching data:", error);
-    // }
-
     api.get(`/generate/${normalize(promptText)}`, {    responseType: 'blob'  })
     .then(async (response) => {
       console.log(response);
-      // const blob = await response.blob();
       const url = URL.createObjectURL(response.data);
       setFileUrl(url);
     })

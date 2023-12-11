@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState } from "react"; 
 // importing Link from react-router-dom to navigate to  
 // different end points. 
 import { Link, useNavigate } from "react-router-dom"; 
-import api from '../api'
 import "../App.css";
   
-//Todo: fill in with contact information
 const Login = () => { 
   const navigate = useNavigate();
 
@@ -48,7 +46,7 @@ const Login = () => {
       <header className = "App-header">
       <h1>Login</h1> 
       <br /> 
-      <form onSubmit={handleLogin}> {/* send to backend */}
+      <form onSubmit={handleLogin}>
             <p>Username:</p>
             <input type="text" name="username" onChange={handleInputChange} value={loginData.username}/>
             <p>Password:</p>
