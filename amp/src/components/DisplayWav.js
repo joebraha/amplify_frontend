@@ -29,7 +29,7 @@ const DisplayWav = ({ audioFiles }) => {
             <audio src={audioFile} ref={audioElems.current[index]} />
             <button className="audio-button" onClick={() => handlePlayPause(index)}>
               <FontAwesomeIcon icon={faMusic} size="2x" style={{ color: "#e2761d" }} />
-              {isplaying[index] ? "Pause" : "Play"} Audio {index + 1}
+              {isplaying[index] ? "Pause" : "Play"}
             </button>
           </div>
         ))}

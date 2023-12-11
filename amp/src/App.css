@@ -76,6 +76,7 @@ body {
 }
 .container {
   text-align: center; /* Center align the content */
+  color: #61dafb;
 }
 
 .center {
@@ -109,7 +110,6 @@ body {
   padding: 15px;
   border: 2px solid #333;
   background-color: #282c34;
-  color: #333;
   cursor: pointer;
   display: flex;
   align-items: center;

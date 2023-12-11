@@ -114,7 +114,7 @@ const SpotifyGetPlaylists = () => {
         {playlists.map((playlist, index) => (
           <li key={index} style={{ marginBottom: '10px' }}>
             {/* <strong>Name: </strong>{playlist.name} <br /> */}
-            <button onClick={() => handleGenreClick(playlist.genre)} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer', textDecoration: 'underline' }}>
+            <button onClick={() => handleGenreClick(playlist.genre)} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer', textDecoration: 'underline', color: "#61dafb"}}>
               {playlist.name}
             </button>
           </li>
