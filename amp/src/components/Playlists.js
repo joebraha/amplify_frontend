@@ -7,14 +7,14 @@ import audio3 from "../Player/audios/audio3.wav";
 import audio4 from "../Player/audios/audio4.wav";
 
 // api fetch calls 
-import axios from 'axios';
+import api from "../api";
 
 const Playlists = () => {
   // below is to be used when Api connection is ready 
   const [audioFiles, setAudioFiles] = useState([]);
   
   useEffect(() => {
-    axios.get('/api/post_user_playlist')
+    api.get('/api/post_user_playlist')
     .then((response) => {
       setAudioFiles(response.data)
     })

@@ -11,15 +11,6 @@ import Artists from './components/Artists';
 import CreateAccount from './components/CreateAccount';
 
 
-const Navbar = () => {
-  return (
-    <>
-      <a href="/components/login_spotify" >Login to Spotify</a>
-    </>
-  )
-}
-
-
 function App() {
   return (
     <BrowserRouter>

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // different end points. 
 import { Link, useNavigate } from "react-router-dom"; 
 import "../App.css";  
+import api from "../api";
 
 
 //Todo: fill in with contact information
@@ -32,13 +33,12 @@ const CreateAccount = () => {
 
     try {
       console.log(loginData);
-      console.log("Sending request to:", 'http://localhost:8000/CreateAccount/');
-      await fetch('http://localhost:8000/CreateAccount/', { 
-        method: 'POST',
+      // console.log("Sending request to:", 'http://localhost:8000/CreateAccount/');
+      await api.post('/CreateAccount/', loginData, { 
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(loginData)});
+        }
+      });
       console.log("User created successfully:");
       // Clear the form after successful submission
       setLoginData({

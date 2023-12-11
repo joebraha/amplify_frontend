@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // different end points. 
 import { Link, useNavigate } from "react-router-dom"; 
 import "../App.css";
+import api from "../api";
   
 const Login = () => { 
   const navigate = useNavigate();
@@ -26,7 +27,8 @@ const Login = () => {
 
     try {
       console.log(loginData);
-      const response = await fetch(`http://localhost:8000/get_user/${loginData.username}`);
+      // const response = await fetch(`http://localhost:8000/get_user/${loginData.username}`);
+      const response = await api.get(`/get_user/${loginData.username}`);
       const user = await response.json();
 
       console.log("User found:", user);

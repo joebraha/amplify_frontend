@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import GetPlaylists from "./GetPlaylists";
 import '../App.css';
+import api from "../api";
 import { Link } from "react-router-dom"; 
 
 const CLIENT_ID = "c0e9c73676684f3e8d10acc56b94be60";
-const REDIR_URI = "http://localhost:3000/spotify";
+const REDIR_URI = "http://localhost:3000/spotify"; // change to app url
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
 const SPACE_DELIMITER = "%20";
@@ -40,12 +41,10 @@ const LoginSpotify = () => {
 
   const sendTokenToBackend = (token) => {
     // Send a POST request to backend endpoint /api/login
-    fetch('/api/login', {
-      method: 'POST',
+    api.post('/api/login', {token}, {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ token }), // Sending the token in the request body
     })
     .then(response => {
       // Handle the response from the backend if needed
